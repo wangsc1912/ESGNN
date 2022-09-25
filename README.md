@@ -10,7 +10,7 @@ Recent years have witnessed an unprecedented surge of interest, from social netw
 
 ## Requirements
 
-The codes are tested on Ubuntu 20.04, CUDA 11.2 with the following packages:
+The codes are tested on Ubuntu 20.04, CUDA 11.1 with the following packages:
 
 ```shell
 torch == 1.9.0
