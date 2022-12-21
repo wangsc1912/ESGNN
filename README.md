@@ -6,7 +6,7 @@ Code for ["Echo state graph neural networks with analogue random resistor arrays
 
 ## Abstract
 
-Recent years have witnessed an unprecedented surge of interest, from social networks to drug discovery, in learning representations of graph-structured data. However, graph neural networks, the machine learning models for handling graph-structured data, face significant challenges when running on conventional digital hardware, including von Neumann bottleneck incurred by physically separated memory and processing units, slowdown of Moore’s law due to transistor scaling limit, and expensive training cost. Here we present a novel hardware-software co-design, the random resistor array-based echo state graph neural network, which addresses these challenges. The random resistor arrays not only harness low-cost, nanoscale and stackable resistors for highly efficient in-memory computing using simple physical laws, but also leverage the intrinsic stochasticity of dielectric breakdown to implement random projections in hardware for an echo state network that effectively minimizes the training complexity thanks to its fixed and random weights. The system demonstrates state-of-the-art performance on both graph classification using the MUTAG and COLLAB datasets and node classification using the CORA dataset, achieving 38.71×, 95.04×, and 579.66× improvement of energy efficiency over digital hardware and 99.35%, 99.99%, and 91.40% reduction of backward pass complexity compared to conventional graph learning, respectively, which may pave the way for the next generation AI system for graph learning.
+Recent years have witnessed a surge of interest in learning representations of graph-structured data, with applications from social networks to drug discovery. However, graph neural networks, the machine learning models for handling graph-structured data, face significant challenges when running on conventional digital hardware, including the von Neumann bottleneck in efficiency incurred by physically separated memory and processing units, and a high training cost. Here we present a hardware-software co-design to address these challenges, by designing an echo state graph neural network based on random resistor arrays, which are built from low-cost, nanoscale and stackable resistors for efficient in-memory computing. The approach leverages the intrinsic stochasticity of dielectric breakdown in the resistors to implement random projections in hardware for an echo state network that effectively minimizes the training complexity thanks to its fixed and random weights. The system demonstrates state-of-the-art performance on both graph classification using the MUTAG and COLLAB datasets and node classification using the CORA dataset, achieving 2.16×, 35.42×, and 40.37× improvement of energy efficiency for a projected random resistor-based hybrid analogue-digital system over a state-of-the-art graphics processing unit and 99.35%, 99.99%, and 91.40% reduction of backward pass complexity compared to conventional graph learning. The results point to a promising direction for the next generation AI system for graph learning.
 
 ## Requirements
 
@@ -15,6 +15,7 @@ The codes are tested on Ubuntu 20.04, CUDA 11.1 with the following packages:
 ```shell
 torch == 1.9.0
 torch-geometric == 1.7.2
+tensorboad == 2.5.0
 scipy == 1.7.0
 numpy == 1.20.2
 ```
@@ -29,6 +30,7 @@ You can install the required dependencies with the following code.
 conda create -n ESGNN python=3.8
 conda activate ESGNN
 conda install pytorch=1.9.0 cudatoolkit=11.1 -c pytorch -c conda-forge --yes
+pip install tensorboard=2.5.0
 CUDA=cu111
 TORCH=1.9.0
 pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-${TORCH}+${CUDA}.html 
@@ -56,10 +58,12 @@ For node classification on `Cora` dataset, run the following line in terminal:
 bash run_cora.sh
 ```
 
-**Note:** The code for graph classification simulation provided in this demo is the same with that using the random resistive memory hardware. The only difference is the weight multiplication function `WeightMultiplication` performs hardware calls to a Xilinx FPGA via [`pynq.dma`](https://pynq.readthedocs.io/en/v2.5/pynq_libraries/dma.html).
+**Note:** The code for graph classification simulation provided in this demo is the same with that using the random resistive memory hardware. The only difference is the weight multiplication function `WeightMultiplication` performs hardware calls to a Xilinx FPGA in the customized system via [`pynq.dma`](https://pynq.readthedocs.io/en/v2.5/pynq_libraries/dma.html).
 
 ## Dataset
 
 Both the processed `MUTAG` and `COLLAB` datasets are provided in `data` folder. The raw data can be downloaded [here](https://ls11-www.cs.tu-dortmund.de/staff/morris/graphkerneldatasets).
 
 The `Cora` dataset can be automatically downloaded in the code via PyG. The raw data can also be downloaded [here](https://relational.fit.cvut.cz/dataset/CORA).
+
+The experimental and simulation measured data are provided in `eperimental_data` subfolder.
