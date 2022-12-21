@@ -21,9 +21,9 @@ parser.add_argument('--dataset', type=str, default='Cora')
 parser.add_argument('--model', type=str, default='esn', choices=['esn', 'gcn'])
 parser.add_argument('--noise', type=float, default=0)
 parser.add_argument('--split', type=str, default='complete', choices=['public', 'full', 'complete'])
-parser.add_argument('--epochs', type=int, default=100)
+parser.add_argument('--epochs', type=int, default=200)
 parser.add_argument('--lr', type=float, default=0.01)
-parser.add_argument('--weight_decay', type=float, default=0.005)   # 0.005
+parser.add_argument('--weight_decay', type=float, default=0.0005)   # 0.005
 parser.add_argument('--early_stopping', type=int, default=0)
 parser.add_argument('--hidden', type=int, default=1000)
 parser.add_argument('--dropout', type=float, default=0.2)   # 0.2
@@ -36,7 +36,6 @@ parser.add_argument('--eps', type=float, default=0.001)
 parser.add_argument('--update_freq', type=int, default=50)
 parser.add_argument('--gamma', type=float, default=None)
 parser.add_argument('--alpha', type=float, default=None)
-parser.add_argument('--hyperparam', type=str, default=None, choices=['eps', 'update_freq', 'gamma', None])
 parser.add_argument('--n_iter', type=int, default=2)
 parser.add_argument('--sparsity', type=float, default=0.4, help='weight sparsity') #0.4
 parser.add_argument('--weight_dist', type=str, default='gaussian', choices=['uniform', 'gaussian'])
@@ -70,14 +69,11 @@ def run(
         update_freq,
         gamma,
         alpha,
-        hyperparam,
         noise,
         save_model=False,
 ):
 
     if logger is not None:
-        if hyperparam:
-            logger += f"-{hyperparam}{eval(hyperparam)}"
         path_logger = os.path.join(path_runs, logger)
 
         utils.empty_dir(path_logger)
@@ -252,25 +248,9 @@ if __name__ == '__main__':
         'update_freq': args.update_freq,
         'gamma': args.gamma,
         'alpha': args.alpha,
-        'hyperparam': args.hyperparam,
         'noise': args.noise,
         'save_model': args.save_model
     }
 
-    if args.hyperparam == 'eps':
-        for param in np.logspace(-3, 0, 10, endpoint=True):
-            print(f"{args.hyperparam}: {param}")
-            kwargs[args.hyperparam] = param
-            _, _, _ = run(**kwargs)
-    elif args.hyperparam == 'update_freq':
-        for param in [4, 8, 16, 32, 64, 128]:
-            print(f"{args.hyperparam}: {param}")
-            kwargs[args.hyperparam] = param
-            _, _, _ = run(**kwargs)
-    elif args.hyperparam == 'gamma':
-        for param in np.linspace(1., 10., 10, endpoint=True):
-            print(f"{args.hyperparam}: {param}")
-            kwargs[args.hyperparam] = param
-            _, _, _ = run(**kwargs)
-    else:
-        _, test_acc, _ = run(**kwargs)
+
+    _, test_acc, _ = run(**kwargs)

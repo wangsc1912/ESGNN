@@ -147,7 +147,7 @@ class NodeClsESGNN(nn.Module):
                                    self.hidden_dim,
                                    self.num_class,
                                    self.n_iter,
-                                   0.2,
+                                   leaky=0.2,
                                    sparsity=sparsity,
                                    weight_dist=weight_dist,
                                    hid_init_dist=hid_init_dist,
