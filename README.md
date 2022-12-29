@@ -66,4 +66,4 @@ Both the processed `MUTAG` and `COLLAB` datasets are provided in `data` folder. 
 
 The `Cora` dataset can be automatically downloaded in the code via PyG. The raw data can also be downloaded [here](https://relational.fit.cvut.cz/dataset/CORA).
 
-The experimental and simulation measured data are provided in `eperimental_data` subfolder.
+The experimental and simulation measured source data are provided in `source_data` subfolder.

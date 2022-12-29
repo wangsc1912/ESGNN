@@ -3,11 +3,3 @@
 __pycache__
 plots/
 .idea
-*.png
-*.jpg
-*.rar
-*.xlsx
-*.TXT
-*.zip
-*.pyc
-*.pdf
