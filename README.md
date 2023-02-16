@@ -1,8 +1,9 @@
 # ESGNN
 
-Code for ["Echo state graph neural networks with analogue random resistor arrays."](https://arxiv.org/abs/2112.15270)
+Code for ["Echo state graph neural networks with analogue random resistive memory arrays."](https://www.nature.com/articles/s42256-023-00609-5)
 
-[![arXiv](https://img.shields.io/badge/arXiv-2112.15270-b31b1b.svg)](https://arxiv.org/abs/2112.15270) ![License](https://img.shields.io/badge/license-MIT-yellow) [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
+[![DOI:10.1038/s42256-023-00609-5](https://zenodo.org/badge/DOI/10.1038/s42256-023-00609-5.svg)](https://doi.org/10.1038/s42256-023-00609-5)
+ ![License](https://img.shields.io/badge/license-MIT-yellow) [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
 
 ## Abstract
 
@@ -67,3 +68,18 @@ Both the processed `MUTAG` and `COLLAB` datasets are provided in `data` folder. 
 The `Cora` dataset can be automatically downloaded in the code via PyG. The raw data can also be downloaded [here](https://relational.fit.cvut.cz/dataset/CORA).
 
 The experimental and simulation measured source data are provided in `source_data` subfolder.
+
+## CItation
+
+If you find this work interesting, welcome to cite our paper!
+
+```
+@article{wang2023echo,
+  title={Echo state graph neural networks with analogue random resistive memory arrays},
+  author={Wang, Shaocong and Li, Yi and Wang, Dingchen and Zhang, Woyu and Chen, Xi and Dong, Danian and Wang, Songqi and Zhang, Xumeng and Lin, Peng and Gallicchio, Claudio and others},
+  journal={Nature Machine Intelligence},
+  pages={1--10},
+  year={2023},
+  publisher={Nature Publishing Group UK London}
+}
+```
